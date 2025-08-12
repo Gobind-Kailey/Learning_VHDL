@@ -36,7 +36,20 @@ entity C4M1P1 is
 end C4M1P1; 
 
 architecture Behavioral of C4M1P1 is 
-    
+    -- Declaring constants in advance for neatness. 
+    constant SEG_0     : std_logic_vector(6 downto 0) := "1000000";
+    constant SEG_1     : std_logic_vector(6 downto 0) := "1111001";
+    constant SEG_2     : std_logic_vector(6 downto 0) := "0100100";
+    constant SEG_3     : std_logic_vector(6 downto 0) := "0110000";
+    constant SEG_4     : std_logic_vector(6 downto 0) := "0011001";
+    constant SEG_5     : std_logic_vector(6 downto 0) := "0010010";
+    constant SEG_6     : std_logic_vector(6 downto 0) := "0000010";
+    constant SEG_7     : std_logic_vector(6 downto 0) := "1111000";
+    constant SEG_8     : std_logic_vector(6 downto 0) := "0000000";
+    constant SEG_9     : std_logic_vector(6 downto 0) := "0010000";
+    constant SEG_BLANK : std_logic_vector(6 downto 0) := "1111111";
+
+
     BEGIN
     -- Note that VHDL uses () not []
     -- Comparing is with "=" not "==" in VHDL
@@ -45,47 +58,39 @@ architecture Behavioral of C4M1P1 is
     -- "1000000" lights up 0 (segment a..g: on, on, on, on, on, on, off).
     -- Note that in the above statement it reads right to left 
     process(SW)
-        begin
-        -- Display 0 
-        if (SW(3 downto 0) = "0000") then
-            HEX0 <= "1000000"; -- Active low for "0"
-        
-        -- Display 1
-        elsif (SW(0) = 0 AND SW(1) = 0 AND SW(2) = 0 AND SW(3) = 1)
-        HEX0 <= "1111100";  
+         -- HEX0 handles SW(3 downto 0)
+    process(SW)
+    begin
+        case SW(3 downto 0) is
+            when "0000" => HEX0 <= SEG_0;
+            when "0001" => HEX0 <= SEG_1;
+            when "0010" => HEX0 <= SEG_2;
+            when "0011" => HEX0 <= SEG_3;
+            when "0100" => HEX0 <= SEG_4;
+            when "0101" => HEX0 <= SEG_5;
+            when "0110" => HEX0 <= SEG_6;
+            when "0111" => HEX0 <= SEG_7;
+            when "1000" => HEX0 <= SEG_8;
+            when "1001" => HEX0 <= SEG_9;
+            when others => HEX0 <= SEG_BLANK; -- invalid → blank
+        end case;
+    end process;
 
-        -- Display 2
-        elsif (SW(0) = 0 AND SW(1) = 0 AND SW(2) = 1 AND SW(3) = 0)
-        HEX0 <= "0100100";  
-
-        elsif (SW(0) = 0 AND SW(1) = 0 AND SW(2) = 0 AND SW(3) = 1)
-        HEX0 <= "1000000";  
-
-        elsif (SW(0) = 0 AND SW(1) = 0 AND SW(2) = 0 AND SW(3) = 1)
-        HEX0 <= "1000000"; 
-
-        elsif (SW(0) = 0 AND SW(1) = 0 AND SW(2) = 0 AND SW(3) = 1)
-        HEX0 <= "1000000";  
-
-        elsif (SW(0) = 0 AND SW(1) = 0 AND SW(2) = 0 AND SW(3) = 1)
-        HEX0 <= "1000000";  
-
-        elsif (SW(0) = 0 AND SW(1) = 0 AND SW(2) = 0 AND SW(3) = 1)
-        HEX0 <= "1000000";  
-
-        elsif (SW(0) = 0 AND SW(1) = 0 AND SW(2) = 0 AND SW(3) = 1)
-        HEX0 <= "1000000"; 
-
-        elsif (SW(0) = 0 AND SW(1) = 0 AND SW(2) = 0 AND SW(3) = 1)
-        HEX0 <= "1000000";  
-
-        elsif (SW(0) = 0 AND SW(1) = 0 AND SW(2) = 0 AND SW(3) = 1)
-        HEX0 <= "1000000";  
-
-        else
-            HEX0 <= "1111111"; -- all off (blank)
-
-        end if; 
-    end process
-    end Behavioral; 
-
+    -- HEX1 handles SW(7 downto 4)
+    process(SW)
+    begin
+        case SW(7 downto 4) is
+            when "0000" => HEX1 <= SEG_0;
+            when "0001" => HEX1 <= SEG_1;
+            when "0010" => HEX1 <= SEG_2;
+            when "0011" => HEX1 <= SEG_3;
+            when "0100" => HEX1 <= SEG_4;
+            when "0101" => HEX1 <= SEG_5;
+            when "0110" => HEX1 <= SEG_6;
+            when "0111" => HEX1 <= SEG_7;
+            when "1000" => HEX1 <= SEG_8;
+            when "1001" => HEX1 <= SEG_9;
+            when others => HEX1 <= SEG_BLANK; -- invalid → blank
+        end case;
+    end process;
+end Behavioral;
