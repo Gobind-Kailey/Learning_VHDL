@@ -57,6 +57,7 @@ architecture Behavioral of C4M1P1 is
     -- Use := inside a process block 
     -- "1000000" lights up 0 (segment a..g: on, on, on, on, on, on, off).
     -- Note that in the above statement it reads right to left 
+    process(SW)
          -- HEX0 handles SW(3 downto 0)
     process(SW)
     begin
