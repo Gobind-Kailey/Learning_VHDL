@@ -10,4 +10,24 @@ and use the output of this comparator in the control of the 7-segment displays.
 
 */ 
 
+Library ieee; 
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all; 
 
+entity C4M1P2 is 
+    port(
+
+        SW : in std_logic_vector(3 downto 0), 
+        HEX0 : out std_logic_vector(7 downto 0),
+        HEX1 : out std_logic_vector(7 downto 0),
+
+    ); 
+
+
+architecture Behavioral of C4M1P2 is 
+
+    begin 
+
+
+
+ 
