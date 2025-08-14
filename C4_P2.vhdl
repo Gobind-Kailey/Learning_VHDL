@@ -29,7 +29,7 @@ end entity;
 
 architecture Behavioral of C4M1P2 is 
 
-    -- Create signals named v1, v2, v3 and v4
+
 
     constant SEG_0 : std_logic_vector(6 downto 0) := "1000000"; 
     constant SEG_1 : std_logic_vector(6 downto 0) := "1111001"; 
@@ -42,22 +42,11 @@ architecture Behavioral of C4M1P2 is
     constant SEG_8 : std_logic_vector(6 downto 0) := "0000000";
     constant SEG_9 : std_logic_vector(6 downto 0) := "0010000"; 
 
-    
-    -- constant SEG_10 : std_logic_vector(3 downto 0) := "1010"; 
-    -- constant SEG_11 : std_logic_vector(3 downto 0) := "1011"; 
-    -- constant SEG_12 : std_logic_vector(3 downto 0) := "1100"; 
-    -- constant SEG_13 : std_logic_vector(3 downto 0) := "1101"; 
-    -- constant SEG_14 : std_logic_vector(3 downto 0) := "1110"; 
-    -- constant SEG_15 : std_logic_vector(3 downto 0) := "1111"; 
+
 
     
     begin 
-        -- the statement below might be wrong if we are reading in reversed order 
-        -- I am assuming we are reading right to left 
-        -- signal v0 = SW(0);
-        -- signal v1 = SW(1);
-        -- signal v2 = SW(2);
-        -- signal v3 = SW(3);
+        
 
         Z <= '1' when unsigned(SW) > 9 else '0';
         process(SW)
